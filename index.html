@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+<body>
+
+
+  <div class="premierediv">
+    <div class="line-container">
+      <svg viewBox="0 0 490 2069" fill="none" preserveAspectRatio="xMidYMax meet">
+        <path d="M208.999 -0.5V466.5C246.5 560.5 352.499 546.5 352.499 546.5C326.499 541.7 295.499 525.5 283.999 513.5C283.999 513.5 208.999 585.5 135.499 513.5C135.499 513.5 96.9994 546.5 67.4994 546.5C67.4994 546.5 -77.5 594 67.4994 622.5C67.4994 622.5 105 626.5 135.499 591C135.499 591 194.5 659 283.999 591C283.999 591 319.5 622.5 352.499 622.5C352.499 622.5 478 671 352.499 709C352.499 709 208.999 709 208.999 773V1296.5L393.5 1352.5L109.5 1499L485.5 1684.5L158.5 2067" stroke="#FF0000" stroke-width="5"/>
+      </svg>
+    </div>
+
+    <section class="one">
+      <h1>div 1</h1>
+    </section>
+
+    <section class="two">
+      <h1>div 2</h1>
+    </section>
+  </div>
+
+  <div class="deuxiemediv">
+    <section class="three">
+      <h1>div 3</h1>
+    </section>
+
+    <section class="four">
+      <h1>div 4</h1>
+    </section>
+  </div>
+
+  <script>
+
+    let path = document.querySelector('path')
+    let pathLength = path.getTotalLength()
+
+    path.style.strokeDasharray = pathLength + ' ' + pathLength;
+
+    path.style.strokeDashoffset = pathLength;
+
+    window.addEventListener('scroll', () => {
+
+      // what % down is it ?
+      // var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+      // var scrollPercentage = (document.documentElement.scrollTop + document.querySelector('.premierediv').scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+
+      // Hauteur totale de la première div
+      let premiereDivHeight = document.querySelector('.premierediv').offsetHeight;
+      // Hauteur totale du document
+      let documentHeight = document.documentElement.scrollHeight - premiereDivHeight;
+      // Position de défilement actuelle
+      let scrollPosition = window.scrollY;
+      // Pourcentage de défilement
+      let scrollPercentage = scrollPosition / documentHeight;
+
+      // Longueur de dessin pour compenser le pourcentage de défilement
+      let drawLength = pathLength * scrollPercentage * 2;
+
+      // Dessiner en sens inverse
+      path.style.strokeDashoffset = pathLength - drawLength;
+
+    })
+
+
+
+  </script>
+
+</body>
+</html>
